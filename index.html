@@ -1,0 +1,113 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini CV Elite Designer</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>✒️</text></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+
+<div class="main-container">
+    <div id="editor-informacoes" class="no-print">
+        <div class="editor-header">
+            <h2><i class="fas fa-id-badge"></i> CV Elite Pro</h2>
+            <button class="theme-toggle" onclick="toggleTheme()">Trocar Tema</button>
+        </div>
+
+        <button class="btn-adicionar" onclick="document.getElementById('input-foto').click()">
+            <i class="fas fa-image"></i> Foto de Perfil
+        </button>
+        <input type="file" id="input-foto" hidden onchange="lerFoto(this)">
+
+        <h3>Dados Pessoais</h3>
+        <label>Nome Completo</label>
+        <input type="text" id="campo-nome" oninput="atualizar()">
+
+        <div class="grid-2">
+            <div><label>Telefone</label><input type="text" id="campo-tel" oninput="atualizar()"></div>
+            <div><label>E-mail</label><input type="email" id="campo-email" oninput="atualizar()"></div>
+        </div>
+
+        <label>Endereço (Rua, nº, Bairro)</label>
+        <input type="text" id="campo-endereco" placeholder="Ex: Rua das Flores, 123 - Centro" oninput="atualizar()">
+        
+        <div class="grid-2">
+            <div><label>Cidade/UF</label><input type="text" id="campo-cidade" oninput="atualizar()"></div>
+            <div><label>LinkedIn (Usuário)</label><input type="text" id="campo-link" oninput="atualizar()"></div>
+        </div>
+
+        <label>GitHub (Usuário)</label>
+        <input type="text" id="campo-github" oninput="atualizar()">
+
+        <label>Resumo Profissional</label>
+        <textarea id="bio" rows="4" oninput="atualizar()"></textarea>
+
+        <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+
+        <h3>Experiência Profissional</h3>
+        <div id="lista-exp"></div>
+        <button class="btn-adicionar" onclick="addBloco('lista-exp', true, 'Tecnologias Usadas', true)">+ Adicionar Experiência</button>
+
+        <h3>Formação Acadêmica</h3>
+        <div id="lista-edu"></div>
+        <button class="btn-adicionar" onclick="addBloco('lista-edu', true, 'Destaques Acadêmicos', true)">+ Adicionar Graduação</button>
+
+        <h3>Cursos e Certificações</h3>
+        <div id="lista-cur"></div>
+        <button class="btn-adicionar" onclick="addBloco('lista-cur', false, 'Competências Aprendidas', false)">+ Adicionar Curso</button>
+
+        <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+        
+        <div class="grid-2">
+            <div>
+                <h3>Hard Skills</h3>
+                <div class="tags-input-container">
+                    <div id="wrap-hard" style="display:flex; flex-wrap:wrap; gap:5px"></div>
+                    <input type="text" placeholder="Aperte Enter..." onkeyup="processSimpleTag(event, this, 'wrap-hard')">
+                </div>
+            </div>
+            <div>
+                <h3>Soft Skills</h3>
+                <div class="tags-input-container">
+                    <div id="wrap-soft" style="display:flex; flex-wrap:wrap; gap:5px"></div>
+                    <input type="text" placeholder="Aperte Enter..." onkeyup="processSimpleTag(event, this, 'wrap-soft')">
+                </div>
+            </div>
+        </div>
+
+        <button onclick="window.print()" style="background: #2563eb; color: white; width: 100%; padding: 20px; margin-top: 30px; border-radius: 12px; font-weight: 800; border: none; cursor: pointer;">
+            GERAR PDF FINAL
+        </button>
+    </div>
+
+    <div class="preview-container">
+        <div id="folha-a4">
+            <div class="cv-header">
+                <div>
+                    <h1 id="cv-nome">SEU NOME</h1>
+                    <div class="cv-contatos" id="cv-contatos"></div>
+                </div>
+                <img id="cv-foto-img" src="">
+            </div>
+
+            <p id="cv-bio" class="cv-desc" style="font-size: 11.5px;"></p>
+            
+            <div id="sec-exp" class="cv-secao" style="display:none"><div class="cv-titulo-secao">Experiência Profissional</div><div id="cv-lista-exp"></div></div>
+            <div id="sec-edu" class="cv-secao" style="display:none"><div class="cv-titulo-secao">Formação Acadêmica</div><div id="cv-lista-edu"></div></div>
+            <div id="sec-cur" class="cv-secao" style="display:none"><div class="cv-titulo-secao">Cursos e Certificações</div><div id="cv-lista-cur"></div></div>
+
+            <div class="skills-grid">
+                <div id="sec-hard" class="cv-secao" style="display:none"><div class="cv-titulo-secao">Hard Skills</div><div id="cv-hard-tags"></div></div>
+                <div id="sec-soft" class="cv-secao" style="display:none"><div class="cv-titulo-secao">Soft Skills</div><div id="cv-soft-tags"></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
